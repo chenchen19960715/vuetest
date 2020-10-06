@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>羊村天气</title>
+    <link rel="stylesheet" type="text/css" href="../css/mian.css">
+
+    <link rel="shortcut icon" href="../images/favicon_080322/favicon.ico">
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- 头部信息 -->
+        <div class="seach_form">
+
+            <div class="title">
+                <h1>小 米 天 气</h1>
+            </div>
+
+            <!-- 搜索框 -->
+            <div class="form_group">
+                <input type="text" v-model="city" class="input_text" placeholder="请输入城市名称"
+                    @keyup.enter="seacherWeather">
+                <button @click="seacherWeather">
+                    查 &nbsp询
+
+            </div>
+
+            <!-- 城市列表 -->
+            <div class="hotcity">
+
+                <a href="javascript:;" @click="hotcity('北京')">[北 京]</a>
+                <a href="javascript:;" @click="hotcity('上海')">[上 海]</a>
+                <a href="javascript:;" @click="hotcity('广州')">[广 州]</a>
+                <a href="javascript:;" @click="hotcity('深圳')">[深 圳]</a>
+                <a href="javascript:;" @click="hotcity('南京')">[南 京]</a>
+                <a href="javascript:;" @click="hotcity('合肥')">[合 肥]</a>
+            </div>
+
+        </div>
+
+        <!-- 天气列表 -->
+
+        <ul class="weather_list" >
+            <!-- 天气列表标题 -->
+            <div class="city_name" >
+                <span v-show="realCity!=''">{{realCity}}五日天气预报</span>
+            </div>
+            <li v-for="item in weatherList" >
+                <div class="weatherInfo">
+                    <div class="info_type">
+                        <span class="iconfont">{{ item.type }}</span>
+                    </div>
+
+                    <div class="info_temp">
+                        <b>{{ item.low }}</b>
+                        ~
+                        <b>{{ item.high }}</b>
+                    </div>
+
+                    <div><span>{{ item.date }}</span></div>
+                </div>
+
+                <span class="line"></span>
+
+
+            </li>
+
+    </div>
+
+
+    </ul>
+
+
+    </div>
+    <!-- 引入axios的函数库 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 引入vue -->
+    <script src="../js/vue.js"></script>
+    <script>
+        /* 请求天气地址：http://wthcdn.etouch.cn/weather_mini
+           请求方式：get
+           请求参数：city(城市名)
+           响应内容：天气信息
+
+           1.点击按钮回车
+           2.查询数据
+           3.渲染数据
+        
+         */
+        var app = new Vue({
+            el: "#app",
+            data: {
+                city: "",
+                realCity:'',
+                weatherList: []
+            },
+            methods: {
+
+                seacherWeather: function () {
+
+                    var that = this
+                    axios.get("http://wthrcdn.etouch.cn/weather_mini?city=" + this.city)
+                        .then(function (response) {
+  that.realCity=response.data.data.city
+                                // 2.清空city
+                                that.city='';
+                            that.weatherList = response.data.data.forecast;
+
+
+                        })
+                },
+                hotcity: function (city) {
+                    // alert(city)
+                    if (city != null && city != "") {
+                        this.city = city
+                    }
+                    var that = this
+                    axios.get("http://wthrcdn.etouch.cn/weather_mini?city=" + this.city)
+                        .then(function (response) {
+                            if (response.data.status == 1000) {
+                                that.weatherList = response.data.data.forecast;
+                          
+                                that.realCity=response.data.data.city
+                                // 2.清空city
+                                that.city='';
+
+                            }
+                            else if (response.data.status == 1002) {
+                                alert("請輸入正確的城市名稱")
+                            }
+
+
+                        })
+                }
+            }
+
+
+        })
+    </script>
+</body>
+
+</html>

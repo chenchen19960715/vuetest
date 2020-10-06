@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小米记事本</title>
+    <link rel="stylesheet" type="text/css" href="../css/note.css">
+</head>
+
+<body>
+    <div id="note">
+        <section id="n_head">
+           <h1 id="titele">小米记事本</h1>
+           <input type="tel" >
+           
+        </section>
+        <section id="n_body">
+            <ul id="n_list">
+
+                <li v-for="(record,index) in records">
+                    <span>{{ index+1}}.</span>
+                    <table>{{ record }}</table>
+                    <button id="dectory"> x </button>
+                </li>
+            </ul>
+        </section>
+    </div>
+    <!-- 引入vue -->
+    <script src="../js/vue.js"></script>
+    <script>
+        var note = new Vue({
+            el: "#note",
+            data: {
+                records: [
+                    "天天学习，好好向上",
+                    "hello world !"
+
+                ]
+            },
+            methods: {
+                showRecods: function () {
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

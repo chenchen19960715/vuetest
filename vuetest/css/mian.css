@@ -1,0 +1,97 @@
+html{
+ /* 背景模糊 */
+ background: url("../images/bg2.jpg") no-repeat fixed;
+ background-size: cover;
+}
+#app {
+    margin-top: 80px;
+    text-align: center;
+   
+   
+}
+
+h1 {
+    /* line-height: 设置行高; */
+
+    color: rgb(148, 133, 248);
+    letter-spacing: 16px;
+}
+.form_group{
+    font-size: 0px;
+}
+.seach_form input {
+    /* 调节输入框字体和边框的距离 */
+    padding-left: 30px;
+    /* 调节字符距离 */
+    letter-spacing: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-right: 0px;
+  
+    width: 300px;
+    height: 34px;
+    font-size: 14px;
+    /* 去除外边框outline:none */
+    outline: none;
+}
+
+.seach_form button {
+    border-style: solid;
+    border-width: 1px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    border-left: none;
+   
+    /* 去除外边框 outline:none */
+    outline: none;
+    margin-left: 0px;
+    height: 38px;
+    width: 90px;
+    /* 设置字体 */
+    font-size: 14px;
+    background: rgb(154, 154, 230);
+}
+
+.hotcity {
+    margin-right: 90px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.hotcity a {
+    
+    text-decoration-line: none;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    margin-left: 12px;
+}
+
+.weather_list {
+    margin-top: 90px;
+    list-style: none;
+}
+.city_name{
+    font-size: 24px;
+    letter-spacing: 4px;
+}
+.weatherInfo{
+    display: inline-block;
+}
+.weather_list li {
+    font-family: 微软雅黑;
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 24px;
+}
+.weather_list li div{
+    margin-top: 14px;
+}
+.line{
+    margin-left: 5px;
+    display: inline-block;
+    height: 85px;
+    border:1px solid #a39f9fec;
+}

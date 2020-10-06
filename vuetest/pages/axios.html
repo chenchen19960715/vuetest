@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>测试axios的使用</title>
+</head>
+
+<body>
+    <input type="button" value="get" id="get-id">
+    <input type="button" value="post" id="post-id">
+
+    <div id="app">
+        <input type="button" value="获取笑话" @click="getJokes">
+        <p v-for="(joke,index) in jokes">"笑话"{{ index+1}}：{{ joke }} </p>
+
+    </div>
+    <!-- 引入axios的函数库 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 引入vue -->
+    <script src="../js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                jokes: []
+            },
+            methods: {
+                getJokes: function () {
+                    var that = this
+                    axios.get("https://autumnfish.cn/api/joke/list?num=8")
+                        .then(function (response) {
+                            console.log(response)
+                            that.jokes = response.data.jokes;
+                        }, function (err) {
+                            console.log(err)
+                        })
+                }
+            }
+
+        })
+        /* get请求
+          请求地址：https://autumnfish.cn/api/joke/list
+          请求参数：num(笑话的条数，数字)
+          相应内容：随机笑话
+           */
+        document.getElementById("get-id").onclick = function () {
+            axios.get("https://autumnfish.cn/api/joke/list?num=0")
+                .then(function (response) {
+                    console.log(response)
+                }, function (err) {
+                    console.log(err)
+                })
+        }
+    </script>
+
+    <script>
+        /* post请求
+      请求地址：https://autumnfish.cn/api/user/reg
+      请求参数：num(笑话的条数，数字)
+      相应内容：随机笑话
+       */
+        document.getElementById("post-id").onclick = function () {
+            axios.post("https://autumnfish.cn/api/user/reg", {
+                    username: "vvc"
+                })
+                .then(function (response) {
+                    console.log(response)
+                }, function (err) {
+                    console.log(err)
+                })
+        }
+    </script>
+</body>
+
+</html>
